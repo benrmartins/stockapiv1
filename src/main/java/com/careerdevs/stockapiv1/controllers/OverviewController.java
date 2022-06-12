@@ -190,5 +190,5 @@ public class OverviewController {
         }
     }
 
-    //Symbol, AssetType, name, Exchange, Currency, Country, Sector
+    //Get and Delete Symbol, AssetType, name, Exchange, Currency, Country, Sector
 }
