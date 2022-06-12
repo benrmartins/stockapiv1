@@ -26,31 +26,6 @@ public class OverviewController {
 
     private final String BASE_URL = "https://www.alphavantage.co/query?function=OVERVIEW";
 //
-    @GetMapping("/test")
-    public ResponseEntity<?> testOverview(RestTemplate restTemplate) {
-        try {
-            String url = BASE_URL + "&symbol=IBM&apikey=demo";
-
-            Overview alphaVantageResponse = restTemplate.getForObject(url, Overview.class);
-
-            if(alphaVantageResponse == null) {
-                ApiError.throwErr(500, "Did not recieve response from AV");
-                return ApiError.customApiError("Did not recieve response from AV", 500);
-            } else if (alphaVantageResponse.getSymbol() == null) {
-                ApiError.throwErr(404, "No Data Retrieved from AV");
-            }
-
-            return ResponseEntity.ok(alphaVantageResponse);
-
-        } catch(DataIntegrityViolationException e)  {
-            return ApiError.customApiError("Can not upload duplicate Stock data", 400);
-        } catch(IllegalArgumentException e) {
-            return ApiError.customApiError("URL is not absolute. Check URL", 500);
-
-        } catch(Exception e) {
-            return ApiError.genericApiError(e);
-        }
-    }
 
     @GetMapping("/{symbol}")
     public ResponseEntity<?> dynamicOverview(RestTemplate restTemplate, @PathVariable String symbol) {
@@ -72,35 +47,7 @@ public class OverviewController {
         }
     }
 
-    @PostMapping("/test")
-    public ResponseEntity<?> testUploadOverview(RestTemplate restTemplate) {
-        try {
-            String url = BASE_URL + "&symbol=IBM&apikey=demo";
 
-            Overview alphaVantageResponse = restTemplate.getForObject(url, Overview.class);
-
-            if(alphaVantageResponse == null) {
-                ApiError.throwErr(500,"Did not recieve response from AV" );
-
-            } else if (alphaVantageResponse.getSymbol() == null) {
-                ApiError.throwErr(500,"No Data Retrieved from AV" );
-            }
-
-            Overview savedOverview = overviewRespository.save(alphaVantageResponse);
-
-            return ResponseEntity.ok(savedOverview);
-
-        } catch(HttpClientErrorException e) {
-            return ApiError.customApiError(e.getMessage(), e.getStatusCode().value());
-        } catch(DataIntegrityViolationException e) {
-            return ApiError.customApiError("Can not upload duplicate Stock data", 400);
-        } catch(IllegalArgumentException e) {
-            return ApiError.customApiError("URL is not absolute. Check URL", 500);
-
-        } catch(Exception e) {
-            return ApiError.genericApiError(e);
-        }
-    }
     @PostMapping("/{symbol}")
     public ResponseEntity<?> uploadOverviewBySymbol(RestTemplate restTemplate, @PathVariable String symbol) {
         try {
