@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -112,6 +113,41 @@ public class OverviewController {
         }
     }
 
+    @GetMapping("/symbol/{symbol}")
+    private ResponseEntity<?> getOverviewBySymbol(@PathVariable String symbol) {
+        try {
+            Optional<Overview> foundOverview = overviewRespository.findBySymbol(symbol);
+
+            if(foundOverview == null) {
+                ApiError.throwErr(404, symbol + " did not match any overview");
+            }
+
+            return ResponseEntity.ok(foundOverview);
+
+
+        } catch(HttpClientErrorException e) {
+            return ApiError.customApiError(e.getMessage(), e.getStatusCode().value());
+        } catch(Exception e) {
+            return ApiError.genericApiError(e);
+        }
+    }
+
+    @GetMapping("/exchange/{exchange}")
+    private ResponseEntity<?> getOverviewByExchange(@PathVariable String exchange) {
+        try {
+            List<Overview> foundOverview = overviewRespository.findByExchange(exchange);
+
+            return ResponseEntity.ok(foundOverview);
+
+
+        } catch(HttpClientErrorException e) {
+            return ApiError.customApiError(e.getMessage(), e.getStatusCode().value());
+        } catch(Exception e) {
+            return ApiError.genericApiError(e);
+        }
+    }
+
+
     @DeleteMapping("/all")
     private ResponseEntity<?> deleteAllOverviews() {
         try {
@@ -154,5 +190,5 @@ public class OverviewController {
         }
     }
 
-
+    //Symbol, AssetType, name, Exchange, Currency, Country, Sector
 }
