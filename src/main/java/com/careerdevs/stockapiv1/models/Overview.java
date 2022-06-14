@@ -18,7 +18,7 @@ public class Overview {
 
     @JsonProperty("AssetType")
     @Column(name="asset_type", nullable = false)
-    private String AssetType;
+    private String assetType;
 
     @JsonProperty("Name")
     @Column(name="name", nullable = false, unique = true)
@@ -69,7 +69,7 @@ public class Overview {
     }
 
     public String getAssetType() {
-        return AssetType;
+        return assetType;
     }
 
     public String getName() {
@@ -118,7 +118,7 @@ public class Overview {
         final StringBuilder sb = new StringBuilder("{");
         sb.append("\"Id\":").append(Id);
         sb.append(", \"symbol\":\"").append(symbol).append('"');
-        sb.append(", \"AssetType\":\"").append(AssetType).append('"');
+        sb.append(", \"AssetType\":\"").append(assetType).append('"');
         sb.append(", \"name\":\"").append(name).append('"');
         sb.append(", \"exchange\":\"").append(exchange).append('"');
         sb.append(", \"currency\":\"").append(currency).append('"');

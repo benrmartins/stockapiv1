@@ -152,8 +152,6 @@ public class OverviewController {
         try {
             List<Overview> foundOverview = null;
 
-
-
             field = field.toLowerCase();
 
             switch (field) {
@@ -163,6 +161,14 @@ public class OverviewController {
                 case "name" -> foundOverview = overviewRespository.findByName(value);
                 case "current" -> foundOverview = overviewRespository.findByCurrency(value);
                 case "country" -> foundOverview = overviewRespository.findByCountry(value);
+                case "marketcapgt" -> foundOverview = overviewRespository.findByMarketCapGreaterThanEqual(Long.parseLong(value));
+                case "marketcaplt" -> foundOverview = overviewRespository.findByMarketCapLessThanEqual(Long.parseLong(value));
+                case "assettype" -> foundOverview = overviewRespository.findByAssetType(value);
+                case "exchange" -> foundOverview = overviewRespository.findByExchange(value);
+                case "yearhighgt" -> foundOverview = overviewRespository.findByYearHighGreaterThanEqual(Float.parseFloat(value));
+                case "yearhighlt" -> foundOverview = overviewRespository.findByYearHighLessThanEqual(Float.parseFloat(value));
+                case "yearlowgt" -> foundOverview = overviewRespository.findByYearLowGreaterThanEqual(Float.parseFloat(value));
+                case "yearlowlt" -> foundOverview = overviewRespository.findByYearLowLessThanEqual(Float.parseFloat(value));
 
             }
 
@@ -194,6 +200,14 @@ public class OverviewController {
                 case "name" -> foundOverview = overviewRespository.deleteByName(value);
                 case "currency" -> foundOverview = overviewRespository.deleteByCurrency(value);
                 case "country" -> foundOverview = overviewRespository.deleteByCountry(value);
+                case "marketcapgt" -> foundOverview = overviewRespository.deleteByMarketCapGreaterThanEqual(Long.parseLong(value));
+                case "marketcaplt" -> foundOverview = overviewRespository.deleteByMarketCapLessThanEqual(Long.parseLong(value));
+                case "assettype" -> foundOverview = overviewRespository.deleteByAssetType(value);
+                case "exchange" -> foundOverview = overviewRespository.deleteByExchange(value);
+                case "yearhighgt" -> foundOverview = overviewRespository.deleteByYearHighGreaterThanEqual(Float.parseFloat(value));
+                case "yearhighlt" -> foundOverview = overviewRespository.deleteByYearHighLessThanEqual(Float.parseFloat(value));
+                case "yearlowgt" -> foundOverview = overviewRespository.deleteByYearLowGreaterThanEqual(Float.parseFloat(value));
+                case "yearlowlt" -> foundOverview = overviewRespository.deleteByYearLowLessThanEqual(Float.parseFloat(value));
 
             }
 
@@ -210,6 +224,11 @@ public class OverviewController {
             return ApiError.genericApiError(e);
         }
     }
+
+
+
+
+
 
 
 //    @GetMapping("/id/{id}")
