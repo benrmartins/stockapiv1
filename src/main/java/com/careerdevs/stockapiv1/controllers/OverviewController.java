@@ -169,6 +169,9 @@ public class OverviewController {
                 case "yearhighlt" -> foundOverview = overviewRespository.findByYearHighLessThanEqual(Float.parseFloat(value));
                 case "yearlowgt" -> foundOverview = overviewRespository.findByYearLowGreaterThanEqual(Float.parseFloat(value));
                 case "yearlowlt" -> foundOverview = overviewRespository.findByYearLowLessThanEqual(Float.parseFloat(value));
+                case "ddafter" -> foundOverview = overviewRespository.findByDividendDateGreaterThanEqual(value);
+                case "ddbefore" -> foundOverview = overviewRespository.findByDividendDateLessThanEqual(value);
+
 
             }
 
@@ -208,7 +211,8 @@ public class OverviewController {
                 case "yearhighlt" -> foundOverview = overviewRespository.deleteByYearHighLessThanEqual(Float.parseFloat(value));
                 case "yearlowgt" -> foundOverview = overviewRespository.deleteByYearLowGreaterThanEqual(Float.parseFloat(value));
                 case "yearlowlt" -> foundOverview = overviewRespository.deleteByYearLowLessThanEqual(Float.parseFloat(value));
-
+                case "ddafter" -> foundOverview = overviewRespository.deleteByDividendDateGreaterThanEqual(value);
+                case "ddbefore" -> foundOverview = overviewRespository.deleteByDividendDateLessThanEqual(value);
             }
 
             if(foundOverview == null || foundOverview.isEmpty()) {
@@ -225,78 +229,4 @@ public class OverviewController {
         }
     }
 
-
-
-
-
-
-
-//    @GetMapping("/id/{id}")
-//    private ResponseEntity<?> getOverviewById(@PathVariable String id) {
-//        try {
-//            List<Overview> foundOverview = overviewRespository.findById(Long.parseLong(id));
-//
-//            if(foundOverview.isEmpty()) {
-//                ApiError.throwErr(404, id + " did not match any overview");
-//            }
-//
-//            return ResponseEntity.ok(foundOverview.get(0));
-//
-//
-//        } catch(HttpClientErrorException e) {
-//            return ApiError.customApiError(e.getMessage(), e.getStatusCode().value());
-//        } catch(NumberFormatException e) {
-//            return ApiError.customApiError("Id Must be a number" + id, 400);
-//        } catch(Exception e) {
-//            return ApiError.genericApiError(e);
-//        }
-//    }
-
-    //    @DeleteMapping("/id/{id}")
-//    private ResponseEntity<?> deleteById(@PathVariable String id) {
-//        try {
-//            long overviewId = Long.parseLong(id);
-//
-//            List<Overview> foundOverview = overviewRespository.findById(Long.parseLong(id));
-//            if(foundOverview.isEmpty()) {
-//                ApiError.throwErr(404, id + " did not match any overview");
-//            }
-//
-//            overviewRespository.deleteById(overviewId);
-//
-//            return ResponseEntity.ok(foundOverview);
-//
-//
-//        } catch(HttpClientErrorException e) {
-//            return ApiError.customApiError(e.getMessage(), e.getStatusCode().value());
-//        } catch(NumberFormatException e) {
-//            return ApiError.customApiError("Id Must be a number" + id, 400);
-//        } catch(Exception e) {
-//            return ApiError.genericApiError(e);
-//        }
-//    }
-
-//    @DeleteMapping("/symbol/{symbol}")
-//    private ResponseEntity<?> deleteBySymbol(@PathVariable String symbol) {
-//        try {
-//            List<Overview> foundOverview = overviewRespository.findBySymbol(symbol);
-//            if(foundOverview.isEmpty()) {
-//                ApiError.throwErr(404, symbol + " did not match any overview");
-//            }
-//
-//            overviewRespository.deleteBySymbol(symbol);
-//
-//            return ResponseEntity.ok(foundOverview);
-//
-//
-//        } catch(HttpClientErrorException e) {
-//            return ApiError.customApiError(e.getMessage(), e.getStatusCode().value());
-//        }  catch(Exception e) {
-//            return ApiError.genericApiError(e);
-//        }
-//    }
-
-
-
-    //Get and Delete Symbol, AssetType, name, Exchange, Currency, Country, Sector
 }

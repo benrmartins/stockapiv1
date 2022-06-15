@@ -24,6 +24,10 @@ public interface OverviewRespository extends CrudRepository<Overview, Long> {
 
     public List<Overview> findByYearLowGreaterThanEqual(Float yearLow);
     public List<Overview> findByYearLowLessThanEqual(Float yearLow);
+    public List<Overview> findByDividendDateGreaterThanEqual(String dividendDate);
+    public List<Overview> findByDividendDateLessThanEqual(String dividendDate);
+
+
 
 
     public List<Overview> deleteById(long id);
@@ -38,9 +42,10 @@ public interface OverviewRespository extends CrudRepository<Overview, Long> {
     public  List<Overview> deleteByExchange(String exchange);
     public List<Overview> deleteByYearHighGreaterThanEqual(Float yearHigh);
     public List<Overview> deleteByYearHighLessThanEqual(Float yearHigh);
-
     public List<Overview> deleteByYearLowGreaterThanEqual(Float yearLow);
     public List<Overview> deleteByYearLowLessThanEqual(Float yearLow);
+    public List<Overview> deleteByDividendDateGreaterThanEqual(String dividendDate);
+    public List<Overview> deleteByDividendDateLessThanEqual(String dividendDate);
 
 
 
